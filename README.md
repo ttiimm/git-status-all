@@ -16,7 +16,7 @@ cult {"??": 1}
 
 ## Usage
 
-```bash
+```
 Checks for dirty Git repositories
 
 Usage: git-status-all [ROOTDIR]
