@@ -8,13 +8,13 @@ use clap::Parser;
 /// Checks for dirty Git repositories.
 struct Cli {
     /// Optional root dir, otherwise uses current working dir.
-    root: Option<String>,
+    rootdir: Option<String>,
 }
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
     let cwd = env::current_dir().expect("Error: Failed to get current working directory");
-    let root = match cli.root {
+    let root = match cli.rootdir {
         Some(root) => PathBuf::from(root),
         None => cwd.clone(),
     };
