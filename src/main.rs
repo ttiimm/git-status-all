@@ -20,7 +20,12 @@ fn main() -> Result<()> {
     };
 
     let entries = fs::read_dir(&root).context(format!("Couldn't read directory: {:?}", &root))?;
-    for e in entries.filter_map(Result::ok).filter(|e| e.path().is_dir()) {
+    let subdirs = &mut entries
+        .filter_map(Result::ok)
+        .filter(|e| e.path().is_dir())
+        .collect::<Vec<_>>();
+    subdirs.sort_by_key(|e| e.path());
+    for e in subdirs {
         let path = e.path();
         if path.join(".git").exists() {
             let output = Command::new("git")
@@ -36,7 +41,6 @@ fn main() -> Result<()> {
                     let path = path.strip_prefix(&cwd).unwrap_or(path.as_path());
                     println!("{} {:?}", path.display(), statuses);
                 }
-                
             } else {
                 let output = String::from_utf8_lossy(&output.stderr);
                 eprintln!("{}", output);
@@ -49,10 +53,8 @@ fn main() -> Result<()> {
 fn parse(output: &str) -> BTreeMap<String, u32> {
     let mut statuses = BTreeMap::<String, u32>::new();
     for line in output.lines() {
-        match line.split_once(' ') {
-            Some((status, _path)) => *statuses.entry(status.to_string()).or_insert(0) += 1,
-            None => eprintln!("Unparsable output {}", line),
-        }
+        let status = line.chars().take(2).collect::<String>();
+        *statuses.entry(status).or_insert(0) += 1
     }
     statuses
 }
