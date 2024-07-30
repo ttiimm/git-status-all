@@ -1,7 +1,12 @@
 [package]
 name = "git-status-all"
+description = "A Git custom command to check status of subdirectories."
 version = "0.1.0"
+categories = ["command-line-utilities"]
+keywords = ["cli", "git"]
+repository = "https://github.com/ttiimm/git-status-all"
 edition = "2021"
+license = "MIT"
 
 [dependencies]
 anyhow = "1.0.86"
