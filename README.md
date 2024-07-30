@@ -5,14 +5,14 @@ Find subdirectories where untracked or uncommitted files exist.
 The output will show the directory name along with the status using the same annotation as `$ git status --porcelain=v1` (see `man git-status`).
 
 ```bash
-$ git status-all 
+$ git status-all
 git-rcall {"": 1, "??": 2}
 litho {"??": 1}
 cult {"??": 1}
 ```
 
 ## Installation
-![test workflow](https://github.com/ttiimm/git-status-all/actions/workflows/test.yml/badge.svg)
+![tests workflow](https://github.com/ttiimm/git-status-all/actions/workflows/tests.yml/badge.svg)
 
 
 ## Usage
