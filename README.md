@@ -12,6 +12,7 @@ cult {"??": 1}
 ```
 
 ## Installation
+![test workflow](https://github.com/ttiimm/git-status-all/actions/workflows/test.yml/badge.svg)
 
 
 ## Usage
